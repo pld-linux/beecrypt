@@ -8,7 +8,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.0.0
-Release:	1
+Release:	2
 Epoch:		2
 License:	LGPL
 Group:		Libraries
@@ -20,6 +20,7 @@ Patch2:		%{name}-ac_python.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+BuildRequires:	doxygen
 BuildRequires:	libtool
 %if %{with python}
 BuildRequires:	python-devel
@@ -109,6 +110,8 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %{__make} -C python
 %endif
 
+doxygen
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -135,6 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%doc docs/html/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_includedir}/*
