@@ -3,22 +3,20 @@
 # _with_javaglue
 #
 %include	/usr/lib/rpm/macros.python
-%define		snap 20030610
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	3.0.0
-Release:	0.%{snap}.1
+Release:	1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
-#Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
-Source0:	ftp://distfiles.pld-linux.org/src/%{name}-%{version}pre.%{snap}.tar.gz
-# Source0-md5:	c8659b0005a19606a7e182ff09eb10c2
+Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
+# Source0-md5:	18f20c22443f85bd4e285925b56198d9
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-python.patch
 URL:		http://sourceforge.net/projects/beecrypt/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -75,7 +73,7 @@ Pakiet python-beecrypt zawiera modu³, który pozwala aplikacjom napisanym w
 Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 
 %prep
-%setup  -q -n %{name}-%{version}pre
+%setup  -q
 %patch0 -p1
 %patch1 -p1
 
@@ -92,10 +90,16 @@ rm -f missing
 	--with-arch=%{_target_cpu}
 %{__make}
 
+%{__make} -C python
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+%{__make} install -C python \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
