@@ -1,4 +1,5 @@
 Summary:	The BeeCrypt Cryptography Library
+Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	2.1.0
 Release:	1
@@ -27,10 +28,11 @@ ElGamal.
 %description -l pl
 BeeCrypt jest open sourcow± bibliotek±, która zawiera wysoko
 zoptymailzowane funkcje w C oraz assemblerze wielu algorytmów
-szyfrowania m.in. : Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
+szyfrowania m.in.: Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
 
 %package devel
 Summary:	The BeeCrypt Cryptography Library - development files
+Summary(pl):	Pliki dla programistów u¿ywaj±cych biblioteki BeeCrypt
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -44,8 +46,12 @@ Requires:	%{name} = %{version}
 %description devel
 The BeeCrypt Cryptography Library - development files.
 
+%description devel -l pl
+Biblioteka kryptograficzna BeeCrypt - pliki dla programistów.
+
 %package static
 Summary:	The BeeCrypt Cryptography Library - static library
+Summary(pl):	Biblioteka statyczna BeeCrypt
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(es):	Desarrollo/Bibliotecas
@@ -58,6 +64,9 @@ Requires:	%{name}-devel = %{version}
 
 %description static
 The BeeCrypt Cryptography Library - static library.
+
+%description static -l pl
+Biblioteka statyczna BeeCrypt.
 
 %prep
 %setup -q
