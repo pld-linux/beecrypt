@@ -2,6 +2,7 @@
 # Conditional build:
 # _with_javaglue
 #
+%include	/usr/lib/rpm/macros.python
 %define		snap 20030610
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
