@@ -22,3 +22,102 @@
  
  .PHONY:	lint
  lint:
+--- beecrypt-3.0.0/python/Makefile.am.orig	2003-06-29 15:10:28.000000000 +0200
++++ beecrypt-3.0.0/python/Makefile.am	2003-06-29 15:12:10.000000000 +0200
+@@ -4,11 +4,11 @@
+ 
+ LINT = splint
+ 
+-PYVER= 2.2
+-
++PYVER= @WITH_PYTHON_VERSION@
++ 
+ SUBDIRS = test
+ 
+-pylibdir = $(shell python -c 'import sys; print sys.path[1]')
++pylibdir = $(prefix)/lib/python${PYVER}
+ pyincdir = $(prefix)/include/python${PYVER}
+ 
+ EXTRA_DIST = debug-py.c
+--- beecrypt-3.0.0/python/test/Makefile.am.orig	2003-06-29 15:12:33.000000000 +0200
++++ beecrypt-3.0.0/python/test/Makefile.am	2003-06-29 15:13:45.000000000 +0200
+@@ -2,9 +2,10 @@
+ 
+ AUTOMAKE_OPTIONS = 1.4 foreign
+ 
+-PYVER= 2.2
++PYVER= @WITH_PYTHON_VERSION@
+ 
+-pylibdir = $(shell python -c 'import sys; print sys.path[1]')
++
++pylibdir = $(prefix)/lib/python${PYVER}
+ VALGRIND = # valgrind --verbose --leak-check=yes
+ 
+ EXTRA_DIST = \
+--- beecrypt-3.0.0/configure.ac.orig	2003-06-29 15:32:40.000000000 +0200
++++ beecrypt-3.0.0/configure.ac	2003-06-29 15:32:47.000000000 +0200
+@@ -174,13 +174,7 @@
+   fi
+   ],[ac_with_java=no])
+ 
+-AC_ARG_WITH(python,[  --with-python         creates the python bindings code [default=no]],[
+-  if test "$withval" = no; then
+-    ac_with_python=no
+-  else
+-    ac_with_python=yes
+-  fi
+-  ],[ac_with_python=no])
++AC_ARG_WITH(python,[  --with-python         creates the python bindings code])
+ 
+ # Check for Unix variants
+ AC_AIX
+@@ -561,6 +555,49 @@
+   AC_DEFINE([JAVAGLUE],1)
+ fi
+ 
++# CHECK for python
++if test $withval = yes ; then
++AC_MSG_CHECKING(for python 2.2)
++AC_TRY_RUN([
++#include <python2.2/Python.h>
++main() {
++  exit(strncmp("2.2", PY_VERSION, 3));
++} ],
++  withval=yes, withval=no, withval=yes)
++  AC_MSG_RESULT($withval)
++  if test $withval = yes ; then
++    WITH_PYTHON_VERSION="2.2"
++  else
++
++    AC_MSG_CHECKING(for python 1.5.2)
++    AC_TRY_RUN([
++#include <python1.5/Python.h>
++main() {
++  exit(strcmp("1.5.2", PY_VERSION));
++} ],
++    withval=yes, withval=no, withval=yes)
++    AC_MSG_RESULT($withval)
++    if test $withval = yes ; then
++      WITH_PYTHON_VERSION="1.5"
++    else
++	  AC_MSG_CHECKING(for python 2.3)
++    AC_TRY_RUN([
++	#include <python2.3/Python.h>
++	main() {
++	 exit(strncmp("2.3", PY_VERSION, 3));
++	 } ],
++	withval=yes, withval=no, withval=yes)
++	AC_MSG_RESULT($withval)
++	if test $withval = yes ; then
++	WITH_PYTHON_VERSION="2.3"
++	fi
++    fi
++  fi
++fi
++
++
++AC_SUBST(WITH_PYTHON_VERSION)
++
+ # Checks for entropy sources.
+ AS_MESSAGE(checking for specific entropy devices...)
+ case $target_os in
