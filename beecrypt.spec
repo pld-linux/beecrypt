@@ -1,4 +1,7 @@
+#
+# Conditional build:
 # _with_javaglue
+#
 %define		snap 20030516
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
@@ -7,10 +10,14 @@ Version:	3.0.0
 Release:	0.%{snap}.1
 Epoch:		2
 License:	LGPL
-Group:		Development/Libraries
+Group:		Libraries
 Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
 Patch0:		%{name}-from_rpm.patch
+Patch1:		%{name}-opt.patch
 URL:		http://sourceforge.net/projects/beecrypt/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -51,6 +58,7 @@ Biblioteka statyczna BeeCrypt.
 %prep
 %setup  -q -n %{name}-%{version}pre
 %patch0 -p1
+%patch1 -p1
 
 %build
 rm -f missing
@@ -60,7 +68,9 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	--with%{?!_with_javaglue:out}-javaglue
+	--with%{?!_with_javaglue:out}-javaglue \
+	--with-cpu=%{_target_cpu} \
+	--with-arch=%{_target_cpu}
 %{__make}
 
 %install
@@ -71,12 +81,12 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc README* CONTRIBUTORS AUTHORS BUGS NEWS 
+%doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS NEWS README
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel

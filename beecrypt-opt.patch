@@ -1,0 +1,22 @@
+--- beecrypt-3.0.0pre/configure.ac.orig	2003-05-15 15:31:14.000000000 +0200
++++ beecrypt-3.0.0pre/configure.ac	2003-05-19 21:21:01.000000000 +0200
+@@ -557,7 +557,7 @@
+     CPPFLAGS="$CPPFLAGS -DOPTIMIZE_ARM"
+     ;;
+   athlon*)
+-    CPPFLAGS="$CPPFLAGS -DOPTIMIZE_I386"
++    CPPFLAGS="$CPPFLAGS -DOPTIMIZE_I686"
+     ;;
+   i386)
+     CPPFLAGS="$CPPFLAGS -DOPTIMIZE_I386"
+--- beecrypt-3.0.0pre/acinclude.m4.orig	2003-05-15 15:31:14.000000000 +0200
++++ beecrypt-3.0.0pre/acinclude.m4	2003-05-19 21:20:49.000000000 +0200
+@@ -282,7 +282,7 @@
+     CFLAGS="$CFLAGS -O3 -fomit-frame-pointer"
+     case $bc_target_cpu in
+     athlon*)
+-      CFLAGS="$CFLAGS -mcpu=pentiumpro";
++      CFLAGS="$CFLAGS -mcpu=$bc_target_cpu";
+       ;;
+     i586)
+       CFLAGS="$CFLAGS -mcpu=pentium"
