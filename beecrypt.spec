@@ -1,7 +1,7 @@
 #
 # Conditional build:
-%bcond_with javaglue
-%bcond_without python
+%bcond_with	javaglue	# build with Java support
+%bcond_without	python		# don't build python module
 #
 %include	/usr/lib/rpm/macros.python
 Summary:	The BeeCrypt Cryptography Library
@@ -90,10 +90,10 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
-	--with%{?!_with_javaglue:out}-javaglue \
+	--with%{!?with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
 	--with-arch=%{_target_cpu} \
-	--with%{?!_with_python:out}-python
+	--with%{!?with_python:out}-python
 %{__make}
 
 %if %{with python}
