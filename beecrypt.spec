@@ -3,7 +3,6 @@
 %bcond_with	javaglue	# build with Java support
 %bcond_without	python		# don't build python module
 #
-%include	/usr/lib/rpm/macros.python
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
