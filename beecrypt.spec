@@ -7,7 +7,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	3.1.0
-Release:	1
+Release:	2
 Epoch:		2
 License:	LGPL
 Group:		Libraries
