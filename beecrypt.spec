@@ -14,7 +14,7 @@ Release:	1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
-Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
+Source0:	http://heanet.dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
 # Source0-md5:	820d26437843ab0a6a8a5151a73a657c
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-lib64_fix.patch
