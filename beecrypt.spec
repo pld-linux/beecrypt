@@ -5,6 +5,7 @@
 %bcond_without	javaglue	# build with Java support
 %bcond_with	javac		# use javac instead of gcj
 %bcond_without	python		# don't build python module
+%bcond_without	doc		# don't build documentation
 #
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
@@ -22,26 +23,34 @@ Patch2:		%{name}-ac_python.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+%if %{with doc}
 BuildRequires:	doxygen
+%endif
 %if %{with javaglue} && !%{with javac}
 BuildRequires:	gcj
 %endif
+%if %{with doc}
 BuildRequires:	ghostscript
 BuildRequires:	graphviz
+%endif
 %if %{with javaglue} && %{with javac}
 BuildRequires:	jdk
 %endif
 BuildRequires:	libtool
+%if %{with javaglue} && !%{with javac}
 BuildRequires:	libgcj-devel
+%endif
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 %endif
+%if %{with doc}
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-format-latex
 BuildRequires:	tetex-latex-dstroke
 # note: this is incorrect place, it should be somewhere in tetex packages
 BuildRequires:	tetex-metafont
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_alpha		 -mno-explicit-relocs 
@@ -177,7 +186,9 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %{__make} -C python
 %endif
 
+%if %{with doc}
 doxygen
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -231,9 +242,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libbeecrypt_java.a
 %endif
 
+%if %{with doc}
 %files doc
 %defattr(644,root,root,755)
 %doc docs/html/*
+%endif 
 
 %if %{with python}
 %files -n python-beecrypt
