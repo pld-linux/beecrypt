@@ -22,6 +22,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	ghostscript
+BuildRequires:	graphviz
 BuildRequires:	libtool
 BuildRequires:	libgcj-devel
 %if %{with python}
