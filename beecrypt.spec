@@ -1,6 +1,7 @@
 #
 # Conditional build:
-# _with_javaglue
+%bcond_with javaglue
+%bcond_without python
 #
 %include	/usr/lib/rpm/macros.python
 Summary:	The BeeCrypt Cryptography Library
@@ -92,19 +93,28 @@ rm -f missing
 	--with%{?!_with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
 	--with-arch=%{_target_cpu} \
-	--with-python
+	--with%{?!_with_python:out}-python
 %{__make}
 
+%if %{with python}
 %{__make} -C python
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%if %{with python}
 %{__make} install -C python \
 	DESTDIR=$RPM_BUILD_ROOT
+%endif
+
+%ifarch amd64
+mv $RPM_BUILD_ROOT{%{_prefix}/lib/*,%{_libdir}}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,6 +137,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
 
+%if %{with python}
 %files -n python-beecrypt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{py_sitedir}/*.so
+%endif
