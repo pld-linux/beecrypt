@@ -24,7 +24,7 @@ BuildRequires:	libtool
 %{?with_python:BuildRequires:	python-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	specflags_alpha		"-mno-explicit-relocs"
+%define	specflags_alpha		 -mno-explicit-relocs 
 
 %description
 BeeCrypt is an open source cryptography library that contains highly
