@@ -1,0 +1,24 @@
+--- beecrypt-3.0.0pre/python/Makefile.am.wiget	2003-06-11 01:05:29.000000000 +0200
++++ beecrypt-3.0.0pre/python/Makefile.am	2003-06-11 01:07:13.000000000 +0200
+@@ -24,18 +24,11 @@
+ LDADD =
+ 
+ pythondir = $(pylibdir)/site-packages
+-python_PROGRAMS = _bc.so
+ 
+-_bc_so_SOURCES =
+-_bc_so_LDFLAGS = $(mylibs) $(LIBS) -shared -Wl,-soname,_bc.so
++python_LTLIBRARIES = _bc.la
++_bc_la_LDFLAGS = $(mylibs) $(LIBS) -avoid-version -module
++_bc_la_SOURCES = _bc-py.c mpw-py.c rng-py.c
+ 
+-noinst_LTLIBRARIES = libbc.la
+-libbc_la_SOURCES = _bc-py.c mpw-py.c rng-py.c
+-
+-_bc.so$(EXEEXT): $(libbc_la_OBJECTS)
+-	$(CC) -o $@ $(libbc_la_OBJECTS) $(_bc_so_LDFLAGS)
+-
+-splint_srcs = _bc-py.c $(libbc_la_sources)
+ 
+ .PHONY:	lint
+ lint:
