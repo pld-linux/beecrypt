@@ -5,6 +5,7 @@ Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	3.0.0
 Release:	0.%{snap}.1
+Epoch:		2
 License:	LGPL
 Group:		Development/Libraries
 Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
