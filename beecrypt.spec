@@ -40,6 +40,8 @@ BuildRequires:	python-modules
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-format-latex
 BuildRequires:	tetex-latex-dstroke
+# note: this is incorrect place, it should be somewhere in tetex packages
+BuildRequires:	tetex-metafont
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_alpha		 -mno-explicit-relocs 
