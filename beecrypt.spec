@@ -1,19 +1,21 @@
 #
 # WARNING: despite unchanged SONAME, the RSA ABI (and API) has changed since 3.x!
+#
 # Conditional build:
-%bcond_with	javaglue	# build with Java support
+%bcond_without	javaglue	# build with Java support
+%bcond_with	javac		# use javac instead of gcj
 %bcond_without	python		# don't build python module
 #
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
-Version:	4.1.1
+Version:	4.1.2
 Release:	1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
-# Source0-md5:	b412cb2a692f689bfcd43f29733c3039
+# Source0-md5:	820d26437843ab0a6a8a5151a73a657c
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-lib64_fix.patch
 Patch2:		%{name}-ac_python.patch
@@ -21,8 +23,14 @@ URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
+%if %{with javaglue} && !%{with javac}
+BuildRequires:	gcj
+%endif
 BuildRequires:	ghostscript
 BuildRequires:	graphviz
+%if %{with javaglue} && %{with javac}
+BuildRequires:	jdk
+%endif
 BuildRequires:	libtool
 BuildRequires:	libgcj-devel
 %if %{with python}
@@ -82,12 +90,49 @@ Development documentation for BeeCrypt.
 %description doc -l pl
 Dokumentacja programisty dla biblioteki BeeCrypt.
 
+%package java
+Summary:	BeeCrypt Java glue library
+Summary(pl):	Biblioteka ³±cz±ca BeeCrypt z Jav±
+Group:		Libraries
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description java
+BeeCrypt Java glue library.
+
+%description java -l pl
+Biblioteka ³±cz±ca BeeCrypt z Jav±.
+
+%package java-devel
+Summary:	Development files for BeeCrypt Java glue library
+Summary(pl):	Pliki programistyczne biblioteki ³±cz±cej Beecrypt z Jav±
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
+Requires:	%{name}-java = %{epoch}:%{version}-%{release}
+
+%description java-devel
+Development files for BeeCrypt Java glue library.
+
+%description java-devel -l pl
+Pliki programistyczne biblioteki ³±cz±cej Beecrypt z Jav±.
+
+%package java-static
+Summary:	BeeCrypt Java glue static library
+Summary(pl):	Statyczna biblioteka ³±cz±ca BeeCrypt z Jav±
+Group:		Development/Libraries
+Requires:	%{name}-java-devel = %{epoch}:%{version}-%{release}
+
+%description java-static
+BeeCrypt Java glue static library.
+
+%description java-static -l pl
+Statyczna biblioteka ³±cz±ca BeeCrypt z Jav±.
+
 %package -n python-beecrypt
 Summary:	Python interface to BeeCrypt library
 Summary(pl):	Pythonowy interfejs do biblioteki BeeCrypt
 Group:		Development/Languages/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-%pyrequires_eq	python
+%pyrequires_eq	python-libs
 
 %description -n python-beecrypt
 The python-beecrypt package contains a module which permits applications
@@ -117,6 +162,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{?with_javac:ac_cv_have_gcj=no} \
 	--without-cplusplus \
 	--with%{!?with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
@@ -150,20 +196,38 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
+%post	java -p /sbin/ldconfig
+%postun	java -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS NEWS README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libbeecrypt.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libbeecrypt.so
+%{_libdir}/libbeecrypt.la
+%{_includedir}/beecrypt
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libbeecrypt.a
+
+%if %{with javaglue}
+%files java
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libbeecrypt_java.so.*.*.*
+
+%files java-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libbeecrypt_java.so
+%{_libdir}/libbeecrypt_java.la
+
+%files java-static
+%defattr(644,root,root,755)
+%{_libdir}/libbeecrypt_java.a
+%endif
 
 %files doc
 %defattr(644,root,root,755)
