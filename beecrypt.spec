@@ -12,6 +12,7 @@ Epoch:		2
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
+# Source0-md5:	5f7fdcb0616c8c49aaa1a9de45f43778
 Patch0:		%{name}-from_rpm.patch
 Patch1:		%{name}-opt.patch
 URL:		http://sourceforge.net/projects/beecrypt/
