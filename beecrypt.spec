@@ -2,7 +2,7 @@
 # WARNING: despite unchanged SONAME, the RSA ABI (and API) has changed since 3.x!
 #
 # Conditional build:
-%bcond_without	javaglue	# build with Java support
+%bcond_without	java	# build with Java support
 %bcond_with	javac		# use javac instead of gcj
 %bcond_without	python		# don't build python module
 %bcond_without	doc		# don't build documentation
@@ -26,18 +26,18 @@ BuildRequires:	automake
 %if %{with doc}
 BuildRequires:	doxygen
 %endif
-%if %{with javaglue} && !%{with javac}
+%if %{with java} && !%{with javac}
 BuildRequires:	gcc-java
 %endif
 %if %{with doc}
 BuildRequires:	ghostscript
 BuildRequires:	graphviz
 %endif
-%if %{with javaglue} && %{with javac}
+%if %{with java} && %{with javac}
 BuildRequires:	jdk
 %endif
 BuildRequires:	libtool
-%if %{with javaglue} && !%{with javac}
+%if %{with java} && !%{with javac}
 BuildRequires:	libgcj-devel
 %endif
 %if %{with python}
@@ -175,7 +175,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %configure \
 	%{?with_javac:ac_cv_have_gcj=no} \
 	--without-cplusplus \
-	--with%{!?with_javaglue:out}-javaglue \
+	--with%{!?with_java:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
 %ifarch amd64
 	--with-arch=x86_64 \
@@ -231,7 +231,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libbeecrypt.a
 
-%if %{with javaglue}
+%if %{with java}
 %files java
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libbeecrypt_java.so.*.*.*
