@@ -27,7 +27,7 @@ BuildRequires:	automake
 BuildRequires:	doxygen
 %endif
 %if %{with javaglue} && !%{with javac}
-BuildRequires:	gcj
+BuildRequires:	gcc-java
 %endif
 %if %{with doc}
 BuildRequires:	ghostscript
