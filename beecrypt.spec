@@ -2,7 +2,7 @@
 # Conditional build:
 # _with_javaglue
 #
-%define		snap 20030516
+%define		snap 20030610
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
@@ -11,10 +11,11 @@ Release:	0.%{snap}.1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
-Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
-# Source0-md5:	5f7fdcb0616c8c49aaa1a9de45f43778
-Patch0:		%{name}-from_rpm.patch
-Patch1:		%{name}-opt.patch
+#Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
+Source0:	ftp://distfiles.pld-linux.org/src/%{name}-%{version}pre.%{snap}.tar.gz
+# Source0-md5:	c8659b0005a19606a7e182ff09eb10c2
+Patch0:		%{name}-opt.patch
+Patch1:		%{name}-python.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -55,6 +56,22 @@ The BeeCrypt Cryptography Library - static library.
 
 %description static -l pl
 Biblioteka statyczna BeeCrypt.
+
+%package -n python-beecrypt
+Summary:	Python interface to BeeCrypt library
+Summary(pl):	Pythonowy interfejs do biblioteki BeeCrypt
+Group:		Development/Languages/Python
+Requires:	%{name} = %{version}
+%pyrequires_eq	python
+
+%description -n python-beecrypt
+The python-beecrypt package contains a module which permits applications
+written in the Python programming language to use the interface
+supplied by BeeCrypt libraries.
+
+%description -n python-beecrypt -l pl
+Pakiet python-beecrypt zawiera modu³, który pozwala aplikacjom napisanym w
+Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 
 %prep
 %setup  -q -n %{name}-%{version}pre
@@ -99,3 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files -n python-beecrypt
+%defattr(644,root,root,755)
+%attr(755,root,root) %{py_sitedir}/*.so
