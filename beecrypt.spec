@@ -7,13 +7,13 @@
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
-Version:	4.0.0
-Release:	2
+Version:	4.1.0
+Release:	1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
-# Source0-md5:	f19e060ecc4fc23d8f1268e1b145614f
+# Source0-md5:	073e224bdb27de411c2450717e9aa94c
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-lib64_fix.patch
 Patch2:		%{name}-ac_python.patch
