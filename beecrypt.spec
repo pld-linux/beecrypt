@@ -7,7 +7,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	3.0.0
-Release:	2
+Release:	3
 Epoch:		2
 License:	LGPL
 Group:		Libraries
@@ -89,7 +89,8 @@ rm -f missing
 %configure \
 	--with%{?!_with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
-	--with-arch=%{_target_cpu}
+	--with-arch=%{_target_cpu} \
+	--with-python
 %{__make}
 
 %{__make} -C python
