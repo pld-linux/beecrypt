@@ -1,0 +1,13 @@
+--- beecrypt-4.1.2/configure.ac.orig	2004-12-24 13:53:59.069561400 +0100
++++ beecrypt-4.1.2/configure.ac	2004-12-24 14:00:29.781164208 +0100
+@@ -397,8 +397,8 @@
+       ac_cv_python_include="-I`python -c 'import distutils.sysconfig; print distutils.sysconfig.get_python_inc()'`"
+     ])
+     AC_CACHE_CHECK([where to install python libraries], ac_cv_python_libdir, [
+-      echo "import distutils.sysconfig; print distutils.sysconfig.get_python_lib()" > conftest.py
+-      ac_cv_python_libdir=`python conftest.py`
++      echo "import sys; print sys.version[[:3]]" > conftest.py
++      ac_cv_python_libdir="${libdir}/python`python conftest.py`/site-packages"
+     ])
+   else
+     ac_with_python=no
