@@ -87,6 +87,9 @@ rm -f missing
 %{__autoheader}
 %{__automake}
 %configure \
+%ifarch alpha
+	CFLAGS="%{rpmcflags} -mno-explicit-relocs" \
+%endif
 	--with%{?!_with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
 	--with-arch=%{_target_cpu} \
