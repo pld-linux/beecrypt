@@ -15,6 +15,7 @@ Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
 # Source0-md5:	18f20c22443f85bd4e285925b56198d9
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-python.patch
+Patch2:		%{name}-lib64_fix.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -76,6 +77,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2
 
 %build
 rm -f missing
