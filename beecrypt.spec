@@ -12,20 +12,11 @@ Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
 Source0:	http://www.virtualunlimited.com/download/%{name}-%{version}.tar.gz
+#BuildRequires:	autoconf
+#BuildRequires:	automake
+#BuildRequires:	libtool
 URL:		http://beecrypt.virtualunlimited.com/
 Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%package devel
-Requires:	beecrypt = %{version}
-Summary:	The BeeCrypt Cryptography Library headers
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 
 %description
 BeeCrypt is an open source cryptography library that contains highly
@@ -38,74 +29,76 @@ BeeCrypt jest open sourcow╠ bibliotek╠, ktСra zawiera wysoko
 zoptymailzowane funkcje w C oraz assemblerze wielu algorytmСw
 szyfrowania m.in. : Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
 
-%description devel
-Biblioteki do pakietu BeeCrypt.
+%package devel
+Summary:	The BeeCrypt Cryptography Library - development files
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
+Requires:	%{name} = %{version}
 
-%description devel -l pl
-Biblioteki do pakietu BeeCrypt.
+%description devel
+The BeeCrypt Cryptography Library - development files.
+
+%package static
+Summary:	The BeeCrypt Cryptography Library - static library
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
+Requires:	%{name}-devel = %{version}
+
+%description static
+The BeeCrypt Cryptography Library - static library.
 
 %prep
 %setup -q
 
 %build
-./configure --prefix=%{buildroot}%{_prefix} --target=%{_target}
+#rm -f missing
+#libtoolize --copy --force
+#aclocal
+#autoconf
+#automake -a -c
+%configure2_13 \
+	--enable-static \
+	--%{?debug:en}%{!?debug:dis}able-debug
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+gzip -9nf AUTHORS BENCHMARKS BUGS CONTRIBUTORS ChangeLog NEWS README
 
 %clean
-make clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%{_libdir}/libbeecrypt.la
-%{_libdir}/libbeecrypt.so.2.1.0
-
-%post
-ln -s /usr/lib/libbeecrypt.so.2.1.0 /usr/lib/libbeecrypt.so
-ln -s /usr/lib/libbeecrypt.so.2.1.0 /usr/lib/libbeecrypt.so.2
-
-%postun
-rm -f /usr/lib/libbeecrypt.so.2.1.0
-rm -f /usr/lib/libbeecrypt.so.2
-rm -f /usr/lib/libbeecrypt.so
+%doc BUGS* NEWS* README*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/beecrypt/base64.h
-%{_includedir}/beecrypt/beecrypt.h
-%{_includedir}/beecrypt/blockmode.h
-%{_includedir}/beecrypt/blockpad.h
-%{_includedir}/beecrypt/blowfish.h
-%{_includedir}/beecrypt/blowfishopt.h
-%{_includedir}/beecrypt/dhaes.h
-%{_includedir}/beecrypt/dldp.h
-%{_includedir}/beecrypt/dlkp.h
-%{_includedir}/beecrypt/dlpk.h
-%{_includedir}/beecrypt/dlsvdp-dh.h
-%{_includedir}/beecrypt/elgamal.h
-%{_includedir}/beecrypt/endianness.h
-%{_includedir}/beecrypt/entropy.h
-%{_includedir}/beecrypt/fips180.h
-%{_includedir}/beecrypt/fips180opt.h
-%{_includedir}/beecrypt/fips186.h
-%{_includedir}/beecrypt/hmac.h
-%{_includedir}/beecrypt/hmacmd5.h
-%{_includedir}/beecrypt/hmacsha1.h
-%{_includedir}/beecrypt/hmacsha256.h
-%{_includedir}/beecrypt/md5.h
-%{_includedir}/beecrypt/memchunk.h
-%{_includedir}/beecrypt/mp32.h
-%{_includedir}/beecrypt/mp32opt.h
-%{_includedir}/beecrypt/mp32barrett.h
-%{_includedir}/beecrypt/mp32number.h
-%{_includedir}/beecrypt/mp32prime.h
-%{_includedir}/beecrypt/mtprng.h
-%{_includedir}/beecrypt/rsa.h
-%{_includedir}/beecrypt/rsakp.h
-%{_includedir}/beecrypt/rsapk.h
-%{_includedir}/beecrypt/sha256.h
-%{_includedir}/beecrypt/timestamp.h
+%doc AUTHORS* BENCHMARKS* CONTRIBUTORS* ChangeLog*
+%attr(755,root,root) %{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/lib*.so
+%{_includedir}/beecrypt
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/lib*.a
