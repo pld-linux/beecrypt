@@ -6,16 +6,15 @@
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
-Version:	3.1.0
-Release:	3
+Version:	4.0.0
+Release:	1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
-# Source0-md5:	1472cada46e2ab9f532f984de9740386
+# Source0-md5:	f19e060ecc4fc23d8f1268e1b145614f
 Patch0:		%{name}-opt.patch
-Patch1:		%{name}-python.patch
-Patch2:		%{name}-lib64_fix.patch
+Patch1:		%{name}-lib64_fix.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -23,7 +22,7 @@ BuildRequires:	libtool
 %{?with_python:BuildRequires:	python-devel}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	specflags_alpha		 -mno-explicit-relocs 
+%define		specflags_alpha		 -mno-explicit-relocs 
 
 %description
 BeeCrypt is an open source cryptography library that contains highly
@@ -77,47 +76,45 @@ Pakiet python-beecrypt zawiera modu³, który pozwala aplikacjom napisanym w
 Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 
 %prep
-%setup  -q
+%setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2
+
+# --with-cplusplus or building (even empty) *.cxx into libbeecrypt
+# makes it (and thus rpm) depending on libstdc++ which is unacceptable
+%{__perl} -pi -e 's/ cppglue\.cxx$//' Makefile.am
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
 %{__automake}
 %configure \
+	--without-cplusplus \
 	--with%{!?with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
 	--with-arch=%{_target_cpu} \
 	--with-pic \
 	--with%{!?with_python:out}-python
-%{__make} \
-	libaltdir=%{_libdir} \
-	pylibdir=%{py_libdir}
+%{__make}
 
 %if %{with python}
-%{__make} -C python \
-	pylibdir=%{py_libdir}
+%{__make} -C python
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}
 
 %{__make} install \
-	libaltdir=%{_libdir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with python}
 %{__make} install -C python \
-	libaltdir=%{_libdir} \
-	pylibdir=%{py_libdir} \
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
+
+rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
