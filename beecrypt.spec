@@ -6,13 +6,13 @@
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
-Version:	3.0.0
-Release:	4
+Version:	3.1.0
+Release:	1
 Epoch:		2
 License:	LGPL
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
-# Source0-md5:	18f20c22443f85bd4e285925b56198d9
+# Source0-md5:	1472cada46e2ab9f532f984de9740386
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-python.patch
 Patch2:		%{name}-lib64_fix.patch
@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_includedir}/*
 
