@@ -1,0 +1,12 @@
+--- beecrypt-4.0.0/configure.ac	2004-09-15 18:06:57.124582792 +0000
++++ beecrypt-4.0.0/configure.ac.new	2004-09-15 18:38:47.508160344 +0000
+@@ -387,7 +387,8 @@
+       ac_cv_python_include="-I`python -c 'import distutils.sysconfig; print distutils.sysconfig.get_python_inc()'`"
+     ])
+     AC_CACHE_CHECK([for python libraries], ac_cv_python_libdir, [
+-      ac_cv_python_libdir="`python -c 'import distutils.sysconfig; print distutils.sysconfig.get_python_lib()'`"
++      py_ver="`python -c 'import sys; print sys.version[[:3]]'`"
++      ac_cv_python_libdir="${libdir}/python${py_ver}/site-packages"
+     ])
+   else
+     ac_with_python=no
