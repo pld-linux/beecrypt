@@ -16,11 +16,15 @@ Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
 # Source0-md5:	f19e060ecc4fc23d8f1268e1b145614f
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-lib64_fix.patch
+Patch2:		%{name}-ac_python.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libtool
-%{?with_python:BuildRequires:	python-devel}
+%if %{with python}
+BuildRequires:	python-devel
+BuildRequires:	python-modules
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_alpha		 -mno-explicit-relocs 
@@ -80,6 +84,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 # --with-cplusplus or building (even empty) *.cxx into libbeecrypt
 # makes it (and thus rpm) depending on libstdc++ which is unacceptable
