@@ -36,7 +36,7 @@ szyfrowania m.in.: Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
 Summary:	The BeeCrypt Cryptography Library - development files
 Summary(pl):	Pliki dla programistów u¿ywaj±cych biblioteki BeeCrypt
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 
 %description devel
 The BeeCrypt Cryptography Library - development files.
@@ -48,7 +48,7 @@ Biblioteka kryptograficzna BeeCrypt - pliki dla programistów.
 Summary:	The BeeCrypt Cryptography Library - static library
 Summary(pl):	Biblioteka statyczna BeeCrypt
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 The BeeCrypt Cryptography Library - static library.
@@ -60,7 +60,7 @@ Biblioteka statyczna BeeCrypt.
 Summary:	Python interface to BeeCrypt library
 Summary(pl):	Pythonowy interfejs do biblioteki BeeCrypt
 Group:		Development/Languages/Python
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 %pyrequires_eq	python
 
 %description -n python-beecrypt
