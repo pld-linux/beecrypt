@@ -177,7 +177,11 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 	--without-cplusplus \
 	--with%{!?with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
+%ifarch amd64
+	--with-arch=x86_64 \
+%else
 	--with-arch=%{_target_cpu} \
+%endif
 	--with-pic \
 	--with%{!?with_python:out}-python
 %{__make}
