@@ -16,7 +16,7 @@
 -libbc_la_SOURCES = _bc-py.c mpw-py.c rng-py.c
 -
 -_bc.so$(EXEEXT): $(libbc_la_OBJECTS)
--	$(CC) -o $@ $(libbc_la_OBJECTS) $(_bc_so_LDFLAGS)
+-	$(LINK) -o $@ $(libbc_la_OBJECTS) $(_bc_so_LDFLAGS)
 -
 -splint_srcs = _bc-py.c $(libbc_la_sources)
  
