@@ -21,11 +21,15 @@ URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	doxygen
+BuildRequires:	ghostscript
 BuildRequires:	libtool
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 %endif
+BuildRequires:	tetex-dvips
+BuildRequires:	tetex-format-latex
+BuildRequires:	tetex-latex-dstroke
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags_alpha		 -mno-explicit-relocs 
@@ -65,6 +69,17 @@ The BeeCrypt Cryptography Library - static library.
 %description static -l pl
 Biblioteka statyczna BeeCrypt.
 
+%package doc
+Summary:	Development documentation for BeeCrypt
+Summary(pl):	Dokumentacja programisty dla biblioteki BeeCrypt
+Group:		Documentation
+
+%description doc
+Development documentation for BeeCrypt.
+
+%description doc -l pl
+Dokumentacja programisty dla biblioteki BeeCrypt.
+
 %package -n python-beecrypt
 Summary:	Python interface to BeeCrypt library
 Summary(pl):	Pythonowy interfejs do biblioteki BeeCrypt
@@ -90,6 +105,8 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 # --with-cplusplus or building (even empty) *.cxx into libbeecrypt
 # makes it (and thus rpm) depending on libstdc++ which is unacceptable
 %{__perl} -pi -e 's/ cppglue\.cxx$//' Makefile.am
+# only html docs
+%{__perl} -pi -e 's/^GENERATE_LATEX .*/GENERATE_LATEX = NO/' Doxyfile.in
 
 %build
 %{__libtoolize}
@@ -138,7 +155,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/html/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_includedir}/*
@@ -146,6 +162,10 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files doc
+%defattr(644,root,root,755)
+%doc docs/html/*
 
 %if %{with python}
 %files -n python-beecrypt
