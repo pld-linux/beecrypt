@@ -1,10 +1,11 @@
---- beecrypt-4.0.0/configure.ac.orig	2004-08-01 00:35:37.613627784 +0200
-+++ beecrypt-4.0.0/configure.ac	2004-08-01 00:44:57.718478904 +0200
-@@ -596,7 +596,7 @@
+diff -urN beecrypt-4.1.0.org/configure.ac beecrypt-4.1.0/configure.ac
+--- beecrypt-4.1.0.org/configure.ac	2004-11-17 20:05:37.000000000 +0100
++++ beecrypt-4.1.0/configure.ac	2004-11-18 15:20:28.433531355 +0100
+@@ -601,7 +601,7 @@
  case $target_os in
  linux*)
    case $bc_target_arch in
--  alpha* | powerpc64 | s390x | x86_64)
+-  powerpc64 | s390x | x86_64)
 +  sparc64 | powerpc64 | s390x | x86_64)
      bc_libalt="64"
      ;;
