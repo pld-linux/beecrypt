@@ -1,4 +1,5 @@
 #
+# WARNING: despite unchanged SONAME, the RSA ABI (and API) has changed since 3.x!
 # Conditional build:
 %bcond_with	javaglue	# build with Java support
 %bcond_without	python		# don't build python module
