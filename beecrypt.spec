@@ -23,6 +23,7 @@ BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	ghostscript
 BuildRequires:	libtool
+BuildRequires:	libgcj-devel
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
