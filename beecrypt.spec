@@ -93,11 +93,15 @@ rm -f missing
 	--with%{!?with_javaglue:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
 	--with-arch=%{_target_cpu} \
+	--with-pic \
 	--with%{!?with_python:out}-python
-%{__make}
+%{__make} \
+	libaltdir=%{_libdir} \
+	pylibdir=%{py_libdir}
 
 %if %{with python}
-%{__make} -C python
+%{__make} -C python \
+	pylibdir=%{py_libdir}
 %endif
 
 %install
@@ -105,15 +109,14 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}
 
 %{__make} install \
+	libaltdir=%{_libdir} \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with python}
 %{__make} install -C python \
+	libaltdir=%{_libdir} \
+	pylibdir=%{py_libdir} \
 	DESTDIR=$RPM_BUILD_ROOT
-%endif
-
-%ifarch amd64
-mv $RPM_BUILD_ROOT{%{_prefix}/lib/*,%{_libdir}}
 %endif
 
 %clean
