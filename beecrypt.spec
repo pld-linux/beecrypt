@@ -5,13 +5,6 @@ Version:	2.1.0
 Release:	2
 License:	LGPL
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Source0:	http://www.virtualunlimited.com/download/%{name}-%{version}.tar.gz
 #BuildRequires:	autoconf
 #BuildRequires:	automake
@@ -34,13 +27,6 @@ szyfrowania m.in.: Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
 Summary:	The BeeCrypt Cryptography Library - development files
 Summary(pl):	Pliki dla programistСw u©ywaj╠cych biblioteki BeeCrypt
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -53,13 +39,6 @@ Biblioteka kryptograficzna BeeCrypt - pliki dla programistСw.
 Summary:	The BeeCrypt Cryptography Library - static library
 Summary(pl):	Biblioteka statyczna BeeCrypt
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
