@@ -1,16 +1,16 @@
+# _with_javaglue
+%define		snap 20030516
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
-Version:	2.1.0
-Release:	2
+Version:	3.0.0
+Release:	0.%{snap}.1
 License:	LGPL
 Group:		Development/Libraries
-Source0:	http://www.virtualunlimited.com/download/%{name}-%{version}.tar.gz
-#BuildRequires:	autoconf
-#BuildRequires:	automake
-#BuildRequires:	libtool
-URL:		http://beecrypt.virtualunlimited.com/
-Buildroot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Source0:	http://dl.sf.net/%{name}/%{name}-%{version}pre.%{snap}.tar.gz
+Patch0:		%{name}-from_rpm.patch
+URL:		http://sourceforge.net/projects/beecrypt/
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 BeeCrypt is an open source cryptography library that contains highly
@@ -48,42 +48,41 @@ The BeeCrypt Cryptography Library - static library.
 Biblioteka statyczna BeeCrypt.
 
 %prep
-%setup -q
+%setup  -q -n %{name}-%{version}pre
+%patch0 -p1
 
 %build
-#rm -f missing
-#libtoolize --copy --force
-#aclocal
-#autoconf
-#automake -a -c
-%configure2_13 \
-	--enable-static \
-	--%{?debug:en}%{!?debug:dis}able-debug
+rm -f missing
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--with%{?!_with_javaglue:out}-javaglue
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
+%post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS ChangeLog NEWS README
+%doc README* CONTRIBUTORS AUTHORS BUGS NEWS 
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc AUTHORS* BENCHMARKS* CONTRIBUTORS* ChangeLog*
+%{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/beecrypt
+%{_includedir}/*
 
 %files static
 %defattr(644,root,root,755)
