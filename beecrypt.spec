@@ -44,6 +44,7 @@ BuildRequires:	libgcj-devel
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 %endif
+BuildRequires:	rpmbuild(macros) >= 1.213
 %if %{with doc}
 BuildRequires:	tetex-dvips
 BuildRequires:	tetex-format-latex
@@ -177,7 +178,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 	--without-cplusplus \
 	--with%{!?with_java:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
-%ifarch amd64
+%ifarch %{x8664}
 	--with-arch=x86_64 \
 %else
 	--with-arch=%{_target_cpu} \
