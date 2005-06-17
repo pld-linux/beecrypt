@@ -1,22 +1,58 @@
---- beecrypt-3.0.0pre/configure.ac.wiget	2003-06-10 23:32:46.000000000 +0200
-+++ beecrypt-3.0.0pre/configure.ac	2003-06-11 00:34:19.000000000 +0200
-@@ -649,7 +649,7 @@
+diff -urN beecrypt-4.1.0.org/acinclude.m4 beecrypt-4.1.0/acinclude.m4
+--- beecrypt-4.1.0.org/acinclude.m4	2004-11-18 13:31:16.000000000 +0100
++++ beecrypt-4.1.0/acinclude.m4	2004-11-18 15:18:11.817798072 +0100
+@@ -495,19 +495,19 @@
+         # -march=athlon64 degrades performance
+         ;;
+       athlon*)
+-        CFLAGS="$CFLAGS -march=$bc_target_arch"
++        CFLAGS="$CFLAGS -march=$bc_target_cpu"
+         ;;
+       i586)
+-        CFLAGS="$CFLAGS -march=pentium"
++        CFLAGS="$CFLAGS -march=$bc_target_cpu"
+         ;;
+       i686)
+-        CFLAGS="$CFLAGS -march=pentiumpro"
++        CFLAGS="$CFLAGS -march=$bc_target_cpu"
+         ;;
+       pentium*)
+-        CFLAGS="$CFLAGS -march=$bc_target_arch"
++        CFLAGS="$CFLAGS -march=$bc_target_cpu"
+         ;;
+       powerpc | powerpc64)
+-        CFLAGS="$CFLAGS -mcpu=$bc_target_arch"
++        CFLAGS="$CFLAGS -mcpu=$bc_target_cpu"
+         ;;
+       sparcv8)
+         CFLAGS="$CFLAGS -mv8"
+@@ -570,7 +570,7 @@
+     if test "$bc_cv_c_aggressive_opt" = yes; then
+       case $bc_target_cpu in
+       athlon*)
+-        CXXFLAGS="$CXXFLAGS -mcpu=pentiumpro";
++        CXXFLAGS="$CXXFLAGS -mcpu=$bc_target_cpu";
+         ;;
+       i586)
+         CXXFLAGS="$CXXFLAGS -mcpu=pentium"
+@@ -582,7 +582,7 @@
+         # no -mcpu=... option on ia64
+         ;;
+       pentium*)
+-        CXXFLAGS="$CXXFLAGS -mcpu=$bc_target_arch"
++        CXXFLAGS="$CXXFLAGS -mcpu=$bc_target_cpu"
+         ;;
+       esac
+       # Architecture-specific optimizations
+diff -urN beecrypt-4.1.0.org/configure.ac beecrypt-4.1.0/configure.ac
+--- beecrypt-4.1.0.org/configure.ac	2004-11-17 20:05:37.000000000 +0100
++++ beecrypt-4.1.0/configure.ac	2004-11-18 15:19:07.577852788 +0100
+@@ -489,7 +489,7 @@
      CPPFLAGS="$CPPFLAGS -DOPTIMIZE_ARM"
      ;;
    athlon*)
 -    CPPFLAGS="$CPPFLAGS -DOPTIMIZE_I386 -DOPTIMIZE_MMX"
 +    CPPFLAGS="$CPPFLAGS -DOPTIMIZE_I686 -DOPTIMIZE_MMX"
+     CFLAGS="$CFLAGS -mmmx"
      ;;
    i386)
-     CPPFLAGS="$CPPFLAGS -DOPTIMIZE_I386"
---- beecrypt-3.0.0pre/acinclude.m4.wiget	2003-06-10 23:32:34.000000000 +0200
-+++ beecrypt-3.0.0pre/acinclude.m4	2003-06-11 00:33:24.000000000 +0200
-@@ -288,7 +288,7 @@
-     CFLAGS="$CFLAGS -O3 -fomit-frame-pointer"
-     case $bc_target_cpu in
-     athlon*)
--      CFLAGS="$CFLAGS -mcpu=pentiumpro";
-+      CFLAGS="$CFLAGS -mcpu=$bc_target_cpu";
-       ;;
-     i586)
-       CFLAGS="$CFLAGS -mcpu=pentium"

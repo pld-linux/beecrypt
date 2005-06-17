@@ -1,11 +1,12 @@
---- Makefile.am.orig	Tue Jun 10 22:42:33 2003
-+++ Makefile.am	Thu Jun 26 17:40:42 2003
-@@ -43,7 +43,7 @@
- 
- BEECRYPT_OBJECTS = aes.lo aesopt.lo base64.lo beecrypt.lo blockmode.lo blockpad.lo blowfish.lo blowfishopt.lo dhaes.lo dldp.lo dlkp.lo dlpk.lo dlsvdp-dh.lo dsa.lo elgamal.lo endianness.lo entropy.lo fips186.lo hmac.lo hmacmd5.lo hmacsha1.lo hmacsha256.lo md5.lo memchunk.lo mp.lo mpopt.lo mpbarrett.lo mpnumber.lo mpprime.lo mtprng.lo rsa.lo rsakp.lo rsapk.lo sha1.lo sha1opt.lo sha256.lo timestamp.lo
- 
--libaltdir=$(prefix)/lib@LIBALT@
-+libaltdir=$(prefix)/lib
- 
- libalt_LTLIBRARIES = libbeecrypt.la
- 
+diff -urN beecrypt-4.1.0.org/configure.ac beecrypt-4.1.0/configure.ac
+--- beecrypt-4.1.0.org/configure.ac	2004-11-17 20:05:37.000000000 +0100
++++ beecrypt-4.1.0/configure.ac	2004-11-18 15:20:28.433531355 +0100
+@@ -601,7 +601,7 @@
+ case $target_os in
+ linux*)
+   case $bc_target_arch in
+-  powerpc64 | s390x | x86_64)
++  sparc64 | powerpc64 | s390x | x86_64)
+     bc_libalt="64"
+     ;;
+   esac
