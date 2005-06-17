@@ -6,6 +6,7 @@
 %bcond_with	javac		# use javac instead of gcj
 %bcond_without	python		# don't build python module
 %bcond_without	doc		# don't build documentation
+%bcond_without	static_libs	# don't build static libraries
 #
 Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
@@ -178,6 +179,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 	--without-cplusplus \
 	--with%{!?with_java:out}-javaglue \
 	--with-cpu=%{_target_cpu} \
+	%{!?with_static_libs:--enable-static=no} \
 %ifarch %{x8664}
 	--with-arch=x86_64 \
 %else
@@ -228,9 +230,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libbeecrypt.la
 %{_includedir}/beecrypt
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libbeecrypt.a
+%endif
 
 %if %{with java}
 %files java
@@ -242,9 +246,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libbeecrypt_java.so
 %{_libdir}/libbeecrypt_java.la
 
+%if %{with static_libs}
 %files java-static
 %defattr(644,root,root,755)
 %{_libdir}/libbeecrypt_java.a
+%endif
 %endif
 
 %if %{with doc}
