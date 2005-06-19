@@ -11,7 +11,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.1.2
-Release:	3
+Release:	4
 Epoch:		2
 License:	LGPL
 Group:		Libraries
@@ -53,6 +53,8 @@ BuildRequires:	tetex-latex-dstroke
 BuildRequires:	tetex-metafont
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_libaltdir		/%{_lib}
 
 %define		specflags_alpha		 -mno-explicit-relocs 
 
@@ -185,7 +187,9 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %endif
 	--with-pic \
 	--with%{!?with_python:out}-python
-%{__make}
+
+%{__make} \
+	libaltdir=%{_libaltdir}
 
 %if %{with python}
 %{__make} -C python
@@ -199,12 +203,25 @@ doxygen
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	libaltdir=%{_libaltdir}
 
 %if %{with python}
 %{__make} install -C python \
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
+
+rm -f $RPM_BUILD_ROOT%{_libexecdir}/lib*.so
+
+ln -sf %{_libaltdir}/$(cd $RPM_BUILD_ROOT%{_libaltdir} ; echo libbeecrypt.so.*.*.*) \
+        $RPM_BUILD_ROOT%{_libdir}/libbeecrypt.so
+%{__sed} "s|libdir='%{_libaltdir}'|libdir='%{_libdir}'|" \
+        $RPM_BUILD_ROOT%{_libaltdir}/libbeecrypt.la > $RPM_BUILD_ROOT%{_libdir}/libbeecrypt.la 
+mv $RPM_BUILD_ROOT%{_libaltdir}/libbeecrypt.a $RPM_BUILD_ROOT%{_libdir}/
+
+mv $RPM_BUILD_ROOT%{_libaltdir}/libbeecrypt_java* $RPM_BUILD_ROOT%{_libdir}/
+%{__sed} -i "s|libdir='%{_libaltdir}'|libdir='%{_libdir}'|" \
+        $RPM_BUILD_ROOT%{_libdir}/libbeecrypt_java.la
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 
@@ -220,7 +237,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS NEWS README
-%attr(755,root,root) %{_libdir}/libbeecrypt.so.*.*.*
+%attr(755,root,root) %{_libaltdir}/libbeecrypt.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
