@@ -12,7 +12,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.1.2
-Release:	2
+Release:	4
 Epoch:		2
 License:	LGPL
 Group:		Libraries
@@ -199,6 +199,7 @@ doxygen
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/%{_lib}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -207,6 +208,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install -C python \
 	DESTDIR=$RPM_BUILD_ROOT
 %endif
+
+mv -f $RPM_BUILD_ROOT%{_libdir}/libbeecrypt.so.*.*.* $RPM_BUILD_ROOT/%{_lib}
+ln -sf /%{_lib}/$(cd $RPM_BUILD_ROOT/%{_lib} ; echo libbeecrypt.so.*.*.*) \
+	$RPM_BUILD_ROOT%{_libdir}/libbeecrypt.so
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 
@@ -222,7 +227,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS NEWS README
-%attr(755,root,root) %{_libdir}/libbeecrypt.so.*.*.*
+%attr(755,root,root) /%{_lib}/libbeecrypt.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
