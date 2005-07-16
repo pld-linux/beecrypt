@@ -261,7 +261,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files doc
 %defattr(644,root,root,755)
-%doc docs/html/*
+%doc docs/html
 %endif 
 
 %if %{with python}
