@@ -12,7 +12,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.1.2
-Release:	4
+Release:	5
 Epoch:		2
 License:	LGPL
 Group:		Libraries
@@ -177,7 +177,7 @@ Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
 %configure \
 	%{?with_javac:ac_cv_have_gcj=no} \
 	--without-cplusplus \
-	--with%{!?with_java:out}-javaglue \
+	--with%{!?with_java:out}-java \
 	--with-cpu=%{_target_cpu} \
 	%{!?with_static_libs:--enable-static=no} \
 %ifarch %{x8664}
