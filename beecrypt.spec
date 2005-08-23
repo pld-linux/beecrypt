@@ -219,9 +219,11 @@ ln -sf %{_libaltdir}/$(cd $RPM_BUILD_ROOT%{_libaltdir} ; echo libbeecrypt.so.*.*
         $RPM_BUILD_ROOT%{_libaltdir}/libbeecrypt.la > $RPM_BUILD_ROOT%{_libdir}/libbeecrypt.la 
 mv $RPM_BUILD_ROOT%{_libaltdir}/libbeecrypt.a $RPM_BUILD_ROOT%{_libdir}/
 
+%if %{with java}
 mv $RPM_BUILD_ROOT%{_libaltdir}/libbeecrypt_java* $RPM_BUILD_ROOT%{_libdir}/
 %{__sed} -i "s|libdir='%{_libaltdir}'|libdir='%{_libdir}'|" \
         $RPM_BUILD_ROOT%{_libdir}/libbeecrypt_java.la
+%endif
 
 rm -f $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
 
