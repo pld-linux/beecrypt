@@ -16,7 +16,7 @@ Release:	5
 Epoch:		2
 License:	LGPL
 Group:		Libraries
-Source0:	http://heanet.dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/beecrypt/%{name}-%{version}.tar.gz
 # Source0-md5:	820d26437843ab0a6a8a5151a73a657c
 Patch0:		%{name}-opt.patch
 Patch1:		%{name}-lib64_fix.patch
@@ -55,7 +55,7 @@ BuildRequires:	tetex-metafont
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		specflags_alpha		 -mno-explicit-relocs 
+%define		specflags_alpha		 -mno-explicit-relocs
 
 %description
 BeeCrypt is an open source cryptography library that contains highly
@@ -148,13 +148,14 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 %pyrequires_eq	python-libs
 
 %description -n python-beecrypt
-The python-beecrypt package contains a module which permits applications
-written in the Python programming language to use the interface
-supplied by BeeCrypt libraries.
+The python-beecrypt package contains a module which permits
+applications written in the Python programming language to use the
+interface supplied by BeeCrypt libraries.
 
 %description -n python-beecrypt -l pl
-Pakiet python-beecrypt zawiera modu³, który pozwala aplikacjom napisanym w
-Pythonie na u¿ywanie interfejsu dostarczanego przez bibliotekê BeeCrytp.
+Pakiet python-beecrypt zawiera modu³, który pozwala aplikacjom
+napisanym w Pythonie na u¿ywanie interfejsu dostarczanego przez
+bibliotekê BeeCrytp.
 
 %prep
 %setup -q
@@ -262,7 +263,7 @@ rm -rf $RPM_BUILD_ROOT
 %files doc
 %defattr(644,root,root,755)
 %doc docs/html
-%endif 
+%endif
 
 %if %{with python}
 %files -n python-beecrypt
