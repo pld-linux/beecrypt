@@ -28,7 +28,12 @@ BuildRequires:	automake
 BuildRequires:	doxygen
 %endif
 %if %{with java} && !%{with javac}
+%ifarch i586 i686 athlon pentium3 pentium4 %{x8664}
+BuildRequires:	jdk
+%else
 BuildRequires:	gcc-java
+BuildRequires:  libgcj-devel
+%endif
 %endif
 %if %{with doc}
 BuildRequires:	ghostscript
@@ -38,9 +43,6 @@ BuildRequires:	graphviz
 BuildRequires:	jdk
 %endif
 BuildRequires:	libtool
-%if %{with java} && !%{with javac}
-BuildRequires:	libgcj-devel
-%endif
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
