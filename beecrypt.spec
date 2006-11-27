@@ -32,7 +32,7 @@ BuildRequires:	doxygen
 BuildRequires:	jdk
 %else
 BuildRequires:	gcc-java
-BuildRequires:  libgcj-devel
+BuildRequires:	libgcj-devel
 %endif
 %endif
 %if %{with doc}
