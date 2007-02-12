@@ -9,7 +9,7 @@
 %bcond_without	static_libs	# don't build static libraries
 #
 Summary:	The BeeCrypt Cryptography Library
-Summary(pl.UTF-8):   Biblioteka kryptograficzna BeeCrypt
+Summary(pl.UTF-8):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.1.2
 Release:	6
@@ -72,7 +72,7 @@ szyfrowania m.in.: Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
 
 %package devel
 Summary:	The BeeCrypt Cryptography Library - development files
-Summary(pl.UTF-8):   Pliki dla programistów używających biblioteki BeeCrypt
+Summary(pl.UTF-8):	Pliki dla programistów używających biblioteki BeeCrypt
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -84,7 +84,7 @@ Biblioteka kryptograficzna BeeCrypt - pliki dla programistów.
 
 %package static
 Summary:	The BeeCrypt Cryptography Library - static library
-Summary(pl.UTF-8):   Biblioteka statyczna BeeCrypt
+Summary(pl.UTF-8):	Biblioteka statyczna BeeCrypt
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
@@ -96,7 +96,7 @@ Biblioteka statyczna BeeCrypt.
 
 %package doc
 Summary:	Development documentation for BeeCrypt
-Summary(pl.UTF-8):   Dokumentacja programisty dla biblioteki BeeCrypt
+Summary(pl.UTF-8):	Dokumentacja programisty dla biblioteki BeeCrypt
 Group:		Documentation
 
 %description doc
@@ -107,7 +107,7 @@ Dokumentacja programisty dla biblioteki BeeCrypt.
 
 %package java
 Summary:	BeeCrypt Java glue library
-Summary(pl.UTF-8):   Biblioteka łącząca BeeCrypt z Javą
+Summary(pl.UTF-8):	Biblioteka łącząca BeeCrypt z Javą
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -119,7 +119,7 @@ Biblioteka łącząca BeeCrypt z Javą.
 
 %package java-devel
 Summary:	Development files for BeeCrypt Java glue library
-Summary(pl.UTF-8):   Pliki programistyczne biblioteki łączącej Beecrypt z Javą
+Summary(pl.UTF-8):	Pliki programistyczne biblioteki łączącej Beecrypt z Javą
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-java = %{epoch}:%{version}-%{release}
@@ -132,7 +132,7 @@ Pliki programistyczne biblioteki łączącej Beecrypt z Javą.
 
 %package java-static
 Summary:	BeeCrypt Java glue static library
-Summary(pl.UTF-8):   Statyczna biblioteka łącząca BeeCrypt z Javą
+Summary(pl.UTF-8):	Statyczna biblioteka łącząca BeeCrypt z Javą
 Group:		Development/Libraries
 Requires:	%{name}-java-devel = %{epoch}:%{version}-%{release}
 
@@ -144,7 +144,7 @@ Statyczna biblioteka łącząca BeeCrypt z Javą.
 
 %package -n python-beecrypt
 Summary:	Python interface to BeeCrypt library
-Summary(pl.UTF-8):   Pythonowy interfejs do biblioteki BeeCrypt
+Summary(pl.UTF-8):	Pythonowy interfejs do biblioteki BeeCrypt
 Group:		Development/Languages/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 %pyrequires_eq	python-libs
