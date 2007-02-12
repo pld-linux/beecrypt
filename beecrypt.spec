@@ -9,7 +9,7 @@
 %bcond_without	static_libs	# don't build static libraries
 #
 Summary:	The BeeCrypt Cryptography Library
-Summary(pl):	Biblioteka kryptograficzna BeeCrypt
+Summary(pl.UTF-8):   Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.1.2
 Release:	6
@@ -65,61 +65,61 @@ optimized C and assembler implementations of many well-known
 algorithms including Blowfish, MD5, SHA-1, Diffie-Hellman, and
 ElGamal.
 
-%description -l pl
-BeeCrypt jest open sourcow± bibliotek±, która zawiera wysoko
-zoptymailzowane funkcje w C oraz assemblerze wielu algorytmów
+%description -l pl.UTF-8
+BeeCrypt jest open sourcowÄ… bibliotekÄ…, ktÃ³ra zawiera wysoko
+zoptymailzowane funkcje w C oraz assemblerze wielu algorytmÃ³w
 szyfrowania m.in.: Blowfish, MD5, SHA-1, Diffie-Hellman oraz ElGamal.
 
 %package devel
 Summary:	The BeeCrypt Cryptography Library - development files
-Summary(pl):	Pliki dla programistów u¿ywaj±cych biblioteki BeeCrypt
+Summary(pl.UTF-8):   Pliki dla programistÃ³w uÅ¼ywajÄ…cych biblioteki BeeCrypt
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description devel
 The BeeCrypt Cryptography Library - development files.
 
-%description devel -l pl
-Biblioteka kryptograficzna BeeCrypt - pliki dla programistów.
+%description devel -l pl.UTF-8
+Biblioteka kryptograficzna BeeCrypt - pliki dla programistÃ³w.
 
 %package static
 Summary:	The BeeCrypt Cryptography Library - static library
-Summary(pl):	Biblioteka statyczna BeeCrypt
+Summary(pl.UTF-8):   Biblioteka statyczna BeeCrypt
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 The BeeCrypt Cryptography Library - static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna BeeCrypt.
 
 %package doc
 Summary:	Development documentation for BeeCrypt
-Summary(pl):	Dokumentacja programisty dla biblioteki BeeCrypt
+Summary(pl.UTF-8):   Dokumentacja programisty dla biblioteki BeeCrypt
 Group:		Documentation
 
 %description doc
 Development documentation for BeeCrypt.
 
-%description doc -l pl
+%description doc -l pl.UTF-8
 Dokumentacja programisty dla biblioteki BeeCrypt.
 
 %package java
 Summary:	BeeCrypt Java glue library
-Summary(pl):	Biblioteka ³±cz±ca BeeCrypt z Jav±
+Summary(pl.UTF-8):   Biblioteka Å‚Ä…czÄ…ca BeeCrypt z JavÄ…
 Group:		Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description java
 BeeCrypt Java glue library.
 
-%description java -l pl
-Biblioteka ³±cz±ca BeeCrypt z Jav±.
+%description java -l pl.UTF-8
+Biblioteka Å‚Ä…czÄ…ca BeeCrypt z JavÄ….
 
 %package java-devel
 Summary:	Development files for BeeCrypt Java glue library
-Summary(pl):	Pliki programistyczne biblioteki ³±cz±cej Beecrypt z Jav±
+Summary(pl.UTF-8):   Pliki programistyczne biblioteki Å‚Ä…czÄ…cej Beecrypt z JavÄ…
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Requires:	%{name}-java = %{epoch}:%{version}-%{release}
@@ -127,24 +127,24 @@ Requires:	%{name}-java = %{epoch}:%{version}-%{release}
 %description java-devel
 Development files for BeeCrypt Java glue library.
 
-%description java-devel -l pl
-Pliki programistyczne biblioteki ³±cz±cej Beecrypt z Jav±.
+%description java-devel -l pl.UTF-8
+Pliki programistyczne biblioteki Å‚Ä…czÄ…cej Beecrypt z JavÄ….
 
 %package java-static
 Summary:	BeeCrypt Java glue static library
-Summary(pl):	Statyczna biblioteka ³±cz±ca BeeCrypt z Jav±
+Summary(pl.UTF-8):   Statyczna biblioteka Å‚Ä…czÄ…ca BeeCrypt z JavÄ…
 Group:		Development/Libraries
 Requires:	%{name}-java-devel = %{epoch}:%{version}-%{release}
 
 %description java-static
 BeeCrypt Java glue static library.
 
-%description java-static -l pl
-Statyczna biblioteka ³±cz±ca BeeCrypt z Jav±.
+%description java-static -l pl.UTF-8
+Statyczna biblioteka Å‚Ä…czÄ…ca BeeCrypt z JavÄ….
 
 %package -n python-beecrypt
 Summary:	Python interface to BeeCrypt library
-Summary(pl):	Pythonowy interfejs do biblioteki BeeCrypt
+Summary(pl.UTF-8):   Pythonowy interfejs do biblioteki BeeCrypt
 Group:		Development/Languages/Python
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 %pyrequires_eq	python-libs
@@ -154,10 +154,10 @@ The python-beecrypt package contains a module which permits
 applications written in the Python programming language to use the
 interface supplied by BeeCrypt libraries.
 
-%description -n python-beecrypt -l pl
-Pakiet python-beecrypt zawiera modu³, który pozwala aplikacjom
-napisanym w Pythonie na u¿ywanie interfejsu dostarczanego przez
-bibliotekê BeeCrytp.
+%description -n python-beecrypt -l pl.UTF-8
+Pakiet python-beecrypt zawiera moduÅ‚, ktÃ³ry pozwala aplikacjom
+napisanym w Pythonie na uÅ¼ywanie interfejsu dostarczanego przez
+bibliotekÄ™ BeeCrytp.
 
 %prep
 %setup -q
