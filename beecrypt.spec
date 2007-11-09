@@ -46,6 +46,7 @@ BuildRequires:	libtool
 %if %{with python}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.213
 %if %{with doc}
