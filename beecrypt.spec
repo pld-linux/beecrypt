@@ -232,7 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS NEWS README
 %attr(755,root,root) /%{_lib}/libbeecrypt.so.*.*.*
-%attr(755,root,root) %ghost /%{_lib}/libbeecrypt.so.6
+%attr(755,root,root) %ghost %{_libdir}/libbeecrypt.so.6
 
 %files devel
 %defattr(644,root,root,755)
@@ -250,6 +250,7 @@ rm -rf $RPM_BUILD_ROOT
 %files java
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libbeecrypt_java.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libbeecrypt_java.so.0
 
 %files java-devel
 %defattr(644,root,root,755)
