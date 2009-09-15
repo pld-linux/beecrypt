@@ -232,6 +232,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS BENCHMARKS BUGS CONTRIBUTORS NEWS README
 %attr(755,root,root) /%{_lib}/libbeecrypt.so.*.*.*
+%attr(755,root,root) %ghost /%{_lib}/libbeecrypt.so.?
 
 %files devel
 %defattr(644,root,root,755)
