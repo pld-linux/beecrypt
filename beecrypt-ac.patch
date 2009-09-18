@@ -1,0 +1,24 @@
+--- beecrypt-4.2.1/configure.ac.orig	2009-07-12 09:18:46.000000000 +0200
++++ beecrypt-4.2.1/configure.ac	2009-09-18 17:13:19.564614289 +0200
+@@ -30,7 +30,7 @@
+   ac_enable_debug=no
+   ])
+ 
+-AC_ARG_WITH(cpu,[  --with-cpu              optimize for specific cpu],[A
++AC_ARG_WITH(cpu,[  --with-cpu              optimize for specific cpu],[
+   if test "$ac_enable_expert_mode" = yes; then
+     AC_MSG_ERROR([--with-cpu cannot be used in conjunction with --enable-expert-mode])
+   fi
+--- beecrypt-4.2.1/java/Makefile.am.orig	2009-07-11 10:18:15.000000000 +0200
++++ beecrypt-4.2.1/java/Makefile.am	2009-09-18 21:06:07.360609261 +0200
+@@ -26,9 +26,7 @@
+ 
+ INCLUDES = -I$(top_srcdir)/include
+ 
+-libaltdir=$(prefix)/lib@LIBALT@
+-
+-libalt_LTLIBRARIES = libbeecrypt_java.la
++lib_LTLIBRARIES = libbeecrypt_java.la
+ 
+ libbeecrypt_java_la_SOURCES = \
+ beecrypt_tools.c \
