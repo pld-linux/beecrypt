@@ -173,7 +173,7 @@ mv -f $RPM_BUILD_ROOT%{_libdir}/libbeecrypt.so.* $RPM_BUILD_ROOT/%{_lib}
 ln -sf /%{_lib}/$(basename $RPM_BUILD_ROOT/%{_lib}/libbeecrypt.so.*.*.*) \
 	$RPM_BUILD_ROOT%{_libdir}/libbeecrypt.so
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}
+%{?with_python:%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{la,a}}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
