@@ -11,7 +11,7 @@ Summary:	The BeeCrypt Cryptography Library
 Summary(pl.UTF-8):	Biblioteka kryptograficzna BeeCrypt
 Name:		beecrypt
 Version:	4.2.1
-Release:	1
+Release:	2
 Epoch:		2
 License:	LGPL v2.1+
 Group:		Libraries
@@ -39,6 +39,7 @@ BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
 %endif
+BuildRequires:	libgomp-devel
 BuildRequires:	rpmbuild(macros) >= 1.213
 Obsoletes:	beecrypt-doc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -154,13 +155,15 @@ bibliotekę BeeCrytp.
 %{__autoheader}
 %{__automake}
 %configure \
+	--enable-openmp \
 	%{?with_javac:ac_cv_have_gcj=no} \
 	%{!?with_static_libs:--disable-static} \
 	--without-cplusplus \
 	--with%{!?with_java:out}-java \
 	%{!?with_python:--without-python}
 
-%{__make}
+%{__make} \
+	OPENMP_LIBS="-lgomp"
 
 %install
 rm -rf $RPM_BUILD_ROOT
