@@ -1,0 +1,11 @@
+--- beecrypt-4.2.1/configure.ac.orig	2020-05-05 12:29:19.553508341 +0200
++++ beecrypt-4.2.1/configure.ac	2020-05-05 13:08:26.637640840 +0200
+@@ -557,6 +557,8 @@
+   alpha*)
+     CPPFLAGS="$CPPFLAGS -DOPTIMIZE_ALPHA"
+     ;;
++  armv8*)
++    ;;
+   arm*)
+     CPPFLAGS="$CPPFLAGS -DOPTIMIZE_ARM"
+     ;;

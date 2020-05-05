@@ -19,6 +19,7 @@ Source0:	http://dl.sourceforge.net/project/beecrypt/beecrypt/%{version}/%{name}-
 # Source0-md5:	8441c014170823f2dff97e33df55af1e
 Patch0:		%{name}-ac.patch
 Patch1:		%{name}-ac_python.patch
+Patch2:		%{name}-armv8.patch
 URL:		http://sourceforge.net/projects/beecrypt/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -142,6 +143,7 @@ bibliotekę BeeCrytp.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 # --with-cplusplus or building (even empty) *.cxx into libbeecrypt
 # makes it (and thus rpm) depending on libstdc++ which is unacceptable
