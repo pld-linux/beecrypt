@@ -141,9 +141,9 @@ bibliotekę BeeCrytp.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1
 
 # --with-cplusplus or building (even empty) *.cxx into libbeecrypt
 # makes it (and thus rpm) depending on libstdc++ which is unacceptable
